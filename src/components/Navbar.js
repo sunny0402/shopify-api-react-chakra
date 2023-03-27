@@ -22,6 +22,7 @@ const Navbar = () => {
       <Icon
         fill="white"
         cursor="pointer"
+        // Note: openMenu from shopContext
         onClick={() => openMenu()}
         as={MdDehaze}
         w={30}

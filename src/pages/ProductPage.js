@@ -17,7 +17,7 @@ import {
 const ProductPage = () => {
   let { handle } = useParams();
 
-  console.log("ProductPage: handle: ", handle);
+  // console.log("ProductPage: handle: ", handle);
 
   const { fetchProductWithHandle, product, addItemToCheckout } =
     useContext(ShopContext);
@@ -28,23 +28,41 @@ const ProductPage = () => {
 
   if (!product.title) return <div>Loading ...</div>;
 
-  console.log("ProductPage: product.title", product.title);
-
   return (
-    <Box>
-      <Grid templateColumns="repeat(2, 1fr)">
+    <Box p="2rem">
+      {/* Note: for mobile array of grid layouts */}
+      <Grid templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)"]} m="auto">
         {/* Left side */}
-        <Image src={product.images[0].src} />
+        <Flex alignItems="center" justifyContent="center">
+          {/* TODO image carousel */}
+          <Image src={product.images[0].src} />
+        </Flex>
+
         {/* Right side */}
-        <Box>
-          <Heading>{product.title}</Heading>
-          <Text>${product.variants[0].price.amount}</Text>
-          <Text>${product.description}</Text>
+        <Flex
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          px="2rem" // padding x-axis
+        >
+          <Heading pb="2rem">{product.title}</Heading>
+          <Text pb="2rem" fontWeight="bold">
+            ${product.variants[0].price.amount}
+          </Text>
+          <Text pb="2rem" color="gray.500">
+            ${product.description}
+          </Text>
           {/* Note: would require a selector for multiple variants */}
-          <Button onClick={() => addItemToCheckout(product.variants[0].id, 1)}>
+          <Button
+            _hover={{ opacity: "70%" }}
+            w="10rem"
+            backgroundColor="#FF3880"
+            color="white"
+            onClick={() => addItemToCheckout(product.variants[0].id, 1)}
+          >
             Add to Cart
           </Button>
-        </Box>
+        </Flex>
       </Grid>
     </Box>
   );
