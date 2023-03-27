@@ -37,12 +37,30 @@ class ShopProvider extends Component {
     });
   };
 
-  addItemToCheckout = async () => {
-    return 3;
+  addItemToCheckout = async (variantId, quantity) => {
+    const lineItemsToAdd = [
+      {
+        variantId: variantId,
+        quantity: parseInt(quantity, 10),
+      },
+    ];
+    const checkout = await client.checkout.addLineItems(
+      this.state.checkout.id,
+      lineItemsToAdd
+    );
+    this.setState({ checkout: checkout });
+
+    // Note: open cart whenever a new line item is added
+    this.openCart();
   };
 
   removeLineItem = async (lineItemIdsToRemove) => {
-    return 4;
+    // Note: client.checkout.removeLineItems(checkoutId, lineItemIdsToRemove)
+    const checkout = await client.checkout.removeLineItems(
+      this.state.checkout.id,
+      lineItemIdsToRemove
+    );
+    this.setState({ checkout: checkout });
   };
 
   fetchAllProducts = async () => {

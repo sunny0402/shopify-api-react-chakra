@@ -68,21 +68,21 @@ const Cart = () => {
                           align="center"
                           justify="center"
                         >
-                          {/* <Text fontSize="sm" fontWeight="bold">
+                          <Text fontSize="sm" fontWeight="bold">
                             {item.title}
                           </Text>
-                          <Text fontSize="sm">{item.variant.title}</Text> */}
+                          <Text fontSize="sm">{item.variant.title}</Text>
                         </Box>
-                        {/* <Box>
+                        <Box>
                           <Text
                             height="100%"
                             display="flex"
                             align="center"
                             justifyContent="center"
                           >
-                            {item.variant.price}
+                            ${item.variant.price.amount}
                           </Text>
-                        </Box> */}
+                        </Box>
                       </Grid>
                     ))}
                 </SimpleGrid>
@@ -101,11 +101,12 @@ const Cart = () => {
               )}
             </DrawerBody>
             <DrawerFooter>
-              {/* <Button w="100%">
+              {/* Note; webUrl of checkout object provided by Shopify */}
+              <Button w="100%">
                 <Link w="100%" href={checkout?.webUrl}>
                   Checkout
                 </Link>
-              </Button> */}
+              </Button>
             </DrawerFooter>
           </DrawerContent>
         </DrawerOverlay>
